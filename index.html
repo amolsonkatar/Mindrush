@@ -1,118 +1,140 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#090b0a">
-<title>MindRush | The Art of Playing Smart</title>
+<title>MindRush | Member Access</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090b0a;color:#f4f0e5;font-family:Arial,Helvetica,sans-serif}
-button{font:inherit;cursor:pointer}
-.app{max-width:600px;margin:auto;padding:22px 16px 100px}
-header{display:flex;align-items:center;gap:12px;margin-bottom:28px}
-.logo{background:#174b34;border:1px solid #d6bc75;border-radius:14px;padding:12px;font-size:24px}
-.brand{font-size:22px;font-weight:900;letter-spacing:1px}
-.tag{font-size:10px;letter-spacing:1.5px;color:#aab5ad;margin-top:4px}
-.profile{margin-left:auto;border:1px solid #354239;background:#151b16;color:#d6bc75;border-radius:50%;width:42px;height:42px;font-size:20px}
-.hero{background:linear-gradient(140deg,#172a20,#101512);border:1px solid #344b3b;border-radius:24px;padding:24px 20px;margin-bottom:16px}
-.gold{color:#d6bc75;font-size:11px;font-weight:bold;letter-spacing:1.5px}
-h1{font-size:34px;line-height:1.12;margin:14px 0}
-.green{color:#6ee7a8}
-p{font-size:13px;line-height:1.7;color:#b2bcb4}
-.primary{width:100%;padding:15px;border:0;border-radius:12px;background:#1b6745;color:white;font-weight:800;margin-top:14px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 28px}
-.stat,.game{background:#121713;border:1px solid #2b382e;border-radius:17px;padding:16px}
-.symbol{font-size:24px}
-.value{font-size:22px;font-weight:850;margin:9px 0 4px}
-.small{font-size:11px;color:#9ba89f}
-.heading{font-size:19px;font-weight:800;margin-bottom:14px}
-.games{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.game{text-align:left;color:#f4f0e5;min-height:130px}
-.game:active{transform:scale(.98)}
-.game strong{display:block;margin-top:13px;font-size:15px}
-.game .small{display:block;margin-top:6px}
-.premium{margin-top:24px;background:#1a1710;border:1px solid #57482b;border-radius:20px;padding:20px}
-.price{font-size:30px;font-weight:900;margin-top:10px}
-.price span{font-size:12px;color:#c6b88f;font-weight:normal}
-.premium button{width:100%;background:#d6bc75;color:#17140b;border:0;border-radius:12px;padding:13px;font-weight:900;margin-top:12px}
-.note{font-size:10px;color:#859087;line-height:1.7;margin-top:22px}
-nav{position:fixed;bottom:0;left:0;right:0;max-width:600px;margin:auto;background:#101511;border-top:1px solid #2b382e;display:flex;justify-content:space-around;padding:12px 4px 16px}
-nav button{background:none;border:0;color:#a2ada5;font-size:11px}
-nav span{display:block;font-size:20px;margin-bottom:4px}
-nav button:first-child{color:#6ee7a8}
-@media(min-width:480px){.app{padding-top:30px}h1{font-size:40px}}
+body{margin:0;min-height:100vh;background:#090b0a;color:#f4f0e5;font-family:Arial,Helvetica,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.page{max-width:480px;margin:auto;padding:25px 20px 40px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:35px}
+.logo{width:48px;height:48px;display:grid;place-items:center;background:#174b34;border:1px solid #d6bc75;border-radius:15px;color:#d6bc75;font-size:27px}
+.brand{font-size:21px;font-weight:900;letter-spacing:1.5px}
+.tag{font-size:10px;letter-spacing:1.5px;color:#9ca89f;margin-top:5px}
+.panel{padding:25px 20px;background:linear-gradient(145deg,#151b16,#101310);border:1px solid #354237;border-radius:22px}
+.eyebrow{color:#d6bc75;font-size:10px;font-weight:800;letter-spacing:2px}
+h1{font-size:29px;line-height:1.2;margin:12px 0}
+p{font-size:13px;line-height:1.6;color:#aab5ad}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#090b0a;padding:5px;border-radius:12px;margin:23px 0}
+.tab{border:0;background:transparent;color:#aab5ad;border-radius:9px;padding:12px;font-weight:700}
+.tab.active{background:#1b4b34;color:#f4f0e5}
+.field{margin-top:16px}
+label{display:block;color:#dce3dc;font-size:12px;font-weight:700;margin-bottom:8px}
+input{width:100%;padding:14px;background:#0b0e0c;color:#fff;border:1px solid #354237;border-radius:11px;outline:none}
+input:focus{border-color:#6ee7a8}
+input::placeholder{color:#68756c}
+.primary{width:100%;margin-top:23px;padding:15px;border:0;border-radius:11px;background:#1b6745;color:white;font-weight:800}
+.primary:disabled{opacity:.65;cursor:not-allowed}
+.terms{font-size:11px;color:#89958c;line-height:1.6;margin-top:16px}
+.status{margin-top:15px;padding:12px;border:1px solid #57482b;background:#1a1710;border-radius:10px;color:#d6bc75;font-size:12px;line-height:1.5}
+.hidden{display:none}
+footer{text-align:center;color:#77847a;font-size:10px;line-height:1.7;margin-top:24px}
 </style>
 </head>
 <body>
-<main class="app">
+<main class="page">
 <header>
 <div class="logo">♛</div>
 <div>
 <div class="brand">MINDRUSH</div>
 <div class="tag">THE ART OF PLAYING SMART</div>
 </div>
-<button class="profile" onclick="notice('Profile setup is coming soon.')" aria-label="Profile">♙</button>
 </header>
 
-<section class="hero">
-<div class="gold">YOUR NEXT VICTORY AWAITS</div>
-<h1>THINK SHARP.<br><span class="green">PLAY SMART.</span></h1>
-<p>Challenge your mind, solve puzzles, and earn XP. Every challenge takes under 5 minutes.</p>
-<button class="primary" onclick="notice('Account access is coming soon. Stay tuned!')">ENTER THE ARENA →</button>
-</section>
+<section class="panel">
+<div class="eyebrow">YOUR NEXT LEVEL STARTS HERE</div>
+<h1 id="heading">Create Your Account</h1>
+<p id="subtitle">Join the club. Challenge your mind. Rise through the ranks.</p>
 
-<section class="stats">
-<div class="stat">
-<div class="symbol">⚡</div>
-<div class="value">100 XP</div>
-<div class="small">Welcome Bonus · Demo</div>
+<div class="tabs">
+<button class="tab active" id="signupTab" type="button" onclick="showForm('signup')">SIGN UP</button>
+<button class="tab" id="loginTab" type="button" onclick="showForm('login')">LOG IN</button>
 </div>
-<div class="stat">
-<div class="symbol">🏆</div>
-<div class="value">TOP 50</div>
-<div class="small">Weekly Rankings · Demo</div>
+
+<form id="authForm" onsubmit="submitDemo(event)">
+<div id="nameField" class="field">
+<label for="fullName">Full Name</label>
+<input id="fullName" name="fullName" autocomplete="name" placeholder="Enter your full name" required>
+</div>
+
+<div id="usernameField" class="field">
+<label for="username">Gaming Username</label>
+<input id="username" name="username" autocomplete="username" minlength="3" maxlength="20" placeholder="Choose a unique username" required>
+</div>
+
+<div class="field">
+<label for="email">Email Address</label>
+<input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+</div>
+
+<div class="field">
+<label for="password">Password</label>
+<input id="password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+</div>
+
+<button class="primary" id="submitButton" type="submit">CREATE ACCOUNT</button>
+</form>
+
+<div id="demoStatus" class="status hidden" role="status"></div>
+
+<div class="terms">
+By continuing, you acknowledge that account access is currently a preview. Secure authentication must be enabled before real accounts can be created.
 </div>
 </section>
 
-<section>
-<div class="heading">CHOOSE YOUR CHALLENGE</div>
-<div class="games">
-<button class="game" onclick="notice('Brain Quiz is coming soon.')">
-<div class="symbol">🧠</div><strong>Brain Quiz</strong><span class="small">Knowledge · 2 MIN</span>
-</button>
-<button class="game" onclick="notice('Math Rush is coming soon.')">
-<div class="symbol">✦</div><strong>Math Rush</strong><span class="small">Speed · 2 MIN</span>
-</button>
-<button class="game" onclick="notice('Memory Match is coming soon.')">
-<div class="symbol">▦</div><strong>Memory Match</strong><span class="small">Memory · 3 MIN</span>
-</button>
-<button class="game" onclick="notice('Logic Battle is coming soon.')">
-<div class="symbol">◇</div><strong>Logic Battle</strong><span class="small">Puzzles · 4 MIN</span>
-</button>
-</div>
-</section>
-
-<section class="premium">
-<div class="gold">THE EXCLUSIVE EXPERIENCE</div>
-<h2>♛ MindRush Premium</h2>
-<div class="price">₹699 <span>/ lifetime</span></div>
-<p>Enjoy exclusive games, special tournaments, an ad-free experience, and a premium profile badge.</p>
-<button onclick="notice('Demo mode: Payments are not active. Membership terms and eligibility will be shown before any live payment.')">EXPLORE PREMIUM</button>
-</section>
-
-<p class="note">DEMO VERSION · XP and rewards are simulated. Real payments, cash prizes, and withdrawals are not available.</p>
+<footer>
+MINDRUSH MEMBER ACCESS<br>
+THINK SHARP. PLAY SMART.
+</footer>
 </main>
 
-<nav>
-<button onclick="notice('Home dashboard')"><span>⌂</span>HOME</button>
-<button onclick="notice('Games are coming soon.')"><span>♧</span>GAMES</button>
-<button onclick="notice('Rankings are coming soon.')"><span>♜</span>RANKS</button>
-<button onclick="notice('Profile is coming soon.')"><span>♙</span>PROFILE</button>
-</nav>
-
 <script>
-function notice(message){alert(message)}
+let currentMode = "signup";
+
+function showForm(mode) {
+  currentMode = mode;
+  const signup = mode === "signup";
+
+  document.getElementById("heading").textContent =
+    signup ? "Create Your Account" : "Welcome Back";
+  document.getElementById("subtitle").textContent =
+    signup
+      ? "Join the club. Challenge your mind. Rise through the ranks."
+      : "Your next challenge is waiting. Sign in to continue.";
+
+  document.getElementById("nameField").classList.toggle("hidden", !signup);
+  document.getElementById("usernameField").classList.toggle("hidden", !signup);
+
+  document.getElementById("fullName").required = signup;
+  document.getElementById("username").required = signup;
+  document.getElementById("password").autocomplete =
+    signup ? "new-password" : "current-password";
+
+  document.getElementById("submitButton").textContent =
+    signup ? "CREATE ACCOUNT" : "LOG IN";
+
+  document.getElementById("signupTab").classList.toggle("active", signup);
+  document.getElementById("loginTab").classList.toggle("active", !signup);
+
+  document.getElementById("demoStatus").classList.add("hidden");
+}
+
+function submitDemo(event) {
+  event.preventDefault();
+
+  const status = document.getElementById("demoStatus");
+  status.textContent =
+    currentMode === "signup"
+      ? "Preview only: account creation is not active yet. Secure authentication will be connected in the next step."
+      : "Preview only: login is not active yet. No credentials have been sent or saved.";
+
+  status.classList.remove("hidden");
+}
 </script>
 </body>
 </html>
