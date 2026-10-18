@@ -4,137 +4,270 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090b0a">
-<title>MindRush | Member Access</title>
+<meta name="theme-color" content="#080b09">
+<title>MindRush — Enter Your Arena</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:#090b0a;color:#f4f0e5;font-family:Arial,Helvetica,sans-serif}
-button,input{font:inherit}
-button{cursor:pointer}
-.page{max-width:480px;margin:auto;padding:25px 20px 40px}
-header{display:flex;align-items:center;gap:12px;margin-bottom:35px}
-.logo{width:48px;height:48px;display:grid;place-items:center;background:#174b34;border:1px solid #d6bc75;border-radius:15px;color:#d6bc75;font-size:27px}
-.brand{font-size:21px;font-weight:900;letter-spacing:1.5px}
-.tag{font-size:10px;letter-spacing:1.5px;color:#9ca89f;margin-top:5px}
-.panel{padding:25px 20px;background:linear-gradient(145deg,#151b16,#101310);border:1px solid #354237;border-radius:22px}
-.eyebrow{color:#d6bc75;font-size:10px;font-weight:800;letter-spacing:2px}
-h1{font-size:29px;line-height:1.2;margin:12px 0}
-p{font-size:13px;line-height:1.6;color:#aab5ad}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#090b0a;padding:5px;border-radius:12px;margin:23px 0}
-.tab{border:0;background:transparent;color:#aab5ad;border-radius:9px;padding:12px;font-weight:700}
-.tab.active{background:#1b4b34;color:#f4f0e5}
-.field{margin-top:16px}
-label{display:block;color:#dce3dc;font-size:12px;font-weight:700;margin-bottom:8px}
-input{width:100%;padding:14px;background:#0b0e0c;color:#fff;border:1px solid #354237;border-radius:11px;outline:none}
-input:focus{border-color:#6ee7a8}
-input::placeholder{color:#68756c}
-.primary{width:100%;margin-top:23px;padding:15px;border:0;border-radius:11px;background:#1b6745;color:white;font-weight:800}
-.primary:disabled{opacity:.65;cursor:not-allowed}
-.terms{font-size:11px;color:#89958c;line-height:1.6;margin-top:16px}
-.status{margin-top:15px;padding:12px;border:1px solid #57482b;background:#1a1710;border-radius:10px;color:#d6bc75;font-size:12px;line-height:1.5}
-.hidden{display:none}
-footer{text-align:center;color:#77847a;font-size:10px;line-height:1.7;margin-top:24px}
+:root {
+  --bg:#080b09;
+  --panel:#111713;
+  --green:#58d69a;
+  --gold:#d9bc78;
+  --muted:#a2afa6;
+  --line:#29372e;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; min-height:100vh; color:#f3f6f2;
+  background:radial-gradient(ellipse at 50% 0%,#173325 0%,var(--bg) 55%);
+  font-family:Arial,Helvetica,sans-serif;
+  display:flex; justify-content:center; align-items:center;
+  padding:24px 16px;
+}
+.wrap { width:100%; max-width:430px; }
+.brand { text-align:center; margin-bottom:27px; }
+.mark {
+  width:53px;height:53px;border:1px solid var(--gold);
+  border-radius:17px;display:grid;place-items:center;
+  margin:0 auto 13px;color:var(--gold);font-size:25px;
+}
+h1 { margin:0;font-size:29px;letter-spacing:4px; }
+.tag { margin:9px 0 0;color:var(--muted);font-size:11px;letter-spacing:3px; }
+.card {
+  background:rgba(17,23,19,.96);border:1px solid var(--line);
+  border-radius:22px;padding:25px 21px;
+  box-shadow:0 24px 80px #0007;
+}
+.eyebrow { color:var(--gold);font-size:10px;letter-spacing:2px; }
+h2 { margin:10px 0 8px;font-size:24px; }
+.sub { color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 22px; }
+.tabs { display:flex;gap:8px;margin-bottom:23px; }
+.tabs button {
+  flex:1;background:#0b100d;border:1px solid var(--line);
+  color:var(--muted);padding:12px;border-radius:10px;
+  font-weight:bold;letter-spacing:1px;
+}
+.tabs button.active {
+  color:var(--green);border-color:var(--green);background:#183024;
+}
+.field { margin:14px 0; }
+label { display:block;font-size:12px;color:#d9e1db;margin-bottom:8px; }
+input {
+  width:100%;padding:14px;border-radius:10px;
+  border:1px solid #304036;background:#0a0e0b;
+  color:white;font-size:15px;outline:none;
+}
+input:focus { border-color:var(--green); }
+.primary {
+  width:100%;margin-top:12px;padding:15px;border:0;border-radius:10px;
+  background:var(--green);color:#07120b;font-weight:800;
+  letter-spacing:1px;font-size:13px;
+}
+button { cursor:pointer; }
+button:disabled { opacity:.55;cursor:wait; }
+.message { display:none;margin-top:16px;padding:12px;border-radius:9px;
+  font-size:13px;line-height:1.6;overflow-wrap:anywhere; }
+.message.show { display:block; }
+.message.info { background:#17271e;color:#b9edce; }
+.message.error { background:#351b1b;color:#ffc6c6; }
+.small { text-align:center;color:var(--muted);font-size:11px;line-height:1.6;margin-top:19px; }
+.account { display:none; }
+.account.visible { display:block; }
+.auth.visible { display:block; }
+.auth { display:none; }
+.user-email { color:var(--green);overflow-wrap:anywhere; }
+.stat { margin:20px 0;padding:18px;border:1px solid var(--line);border-radius:13px; }
+.stat strong { display:block;font-size:26px;color:var(--gold);margin-top:7px; }
+.secondary {
+  width:100%;margin-top:10px;padding:13px;border-radius:10px;
+  border:1px solid var(--line);background:transparent;color:white;
+}
 </style>
 </head>
 <body>
-<main class="page">
-<header>
-<div class="logo">♛</div>
-<div>
-<div class="brand">MINDRUSH</div>
-<div class="tag">THE ART OF PLAYING SMART</div>
-</div>
-</header>
+<main class="wrap">
+  <header class="brand">
+    <div class="mark">M</div>
+    <h1>MINDRUSH</h1>
+    <p class="tag">THINK SHARP. PLAY SMART.</p>
+  </header>
 
-<section class="panel">
-<div class="eyebrow">YOUR NEXT LEVEL STARTS HERE</div>
-<h1 id="heading">Create Your Account</h1>
-<p id="subtitle">Join the club. Challenge your mind. Rise through the ranks.</p>
+  <section class="card auth visible" id="authCard">
+    <div class="eyebrow">YOUR NEXT CHALLENGE STARTS HERE</div>
+    <h2 id="heading">Create your account</h2>
+    <p class="sub" id="intro">Join the arena. Build your skills. Make every move count.</p>
 
-<div class="tabs">
-<button class="tab active" id="signupTab" type="button" onclick="showForm('signup')">SIGN UP</button>
-<button class="tab" id="loginTab" type="button" onclick="showForm('login')">LOG IN</button>
-</div>
+    <div class="tabs">
+      <button type="button" id="signupTab" class="active" onclick="setMode('signup')">SIGN UP</button>
+      <button type="button" id="loginTab" onclick="setMode('login')">LOG IN</button>
+    </div>
 
-<form id="authForm" onsubmit="submitDemo(event)">
-<div id="nameField" class="field">
-<label for="fullName">Full Name</label>
-<input id="fullName" name="fullName" autocomplete="name" placeholder="Enter your full name" required>
-</div>
+    <form id="authForm">
+      <div class="field" id="nameField">
+        <label for="fullName">Full name</label>
+        <input id="fullName" autocomplete="name" maxlength="80" required>
+      </div>
+      <div class="field" id="usernameField">
+        <label for="username">Gaming username</label>
+        <input id="username" autocomplete="nickname" minlength="3" maxlength="20"
+          pattern="[A-Za-z0-9_]+" placeholder="Choose a unique username" required>
+      </div>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password"
+          minlength="8" required>
+      </div>
+      <button class="primary" id="submitBtn" type="submit">CREATE ACCOUNT</button>
+    </form>
+    <div class="message" id="message" role="status" aria-live="polite"></div>
+    <p class="small">Your account is protected by Supabase Authentication. Never share your password with anyone.</p>
+  </section>
 
-<div id="usernameField" class="field">
-<label for="username">Gaming Username</label>
-<input id="username" name="username" autocomplete="username" minlength="3" maxlength="20" placeholder="Choose a unique username" required>
-</div>
-
-<div class="field">
-<label for="email">Email Address</label>
-<input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
-</div>
-
-<div class="field">
-<label for="password">Password</label>
-<input id="password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
-</div>
-
-<button class="primary" id="submitButton" type="submit">CREATE ACCOUNT</button>
-</form>
-
-<div id="demoStatus" class="status hidden" role="status"></div>
-
-<div class="terms">
-By continuing, you acknowledge that account access is currently a preview. Secure authentication must be enabled before real accounts can be created.
-</div>
-</section>
-
-<footer>
-MINDRUSH MEMBER ACCESS<br>
-THINK SHARP. PLAY SMART.
-</footer>
+  <section class="card account" id="accountCard">
+    <div class="eyebrow">WELCOME TO YOUR ARENA</div>
+    <h2>You're signed in.</h2>
+    <p class="sub">Your MindRush account is connected.</p>
+    <div class="stat">
+      <span class="eyebrow">ACCOUNT EMAIL</span>
+      <strong class="user-email" id="accountEmail"></strong>
+    </div>
+    <div class="stat">
+      <span class="eyebrow">GAMING USERNAME</span>
+      <strong id="accountUsername">Player</strong>
+    </div>
+    <p class="sub">Your game dashboard and challenges will be added in the next stage.</p>
+    <button class="secondary" id="logoutBtn" type="button">LOG OUT</button>
+    <div class="message" id="accountMessage" role="status"></div>
+  </section>
 </main>
 
 <script>
-let currentMode = "signup";
+const SUPABASE_URL = "https://fanfdlnbxcmghjxqpldh.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
 
-function showForm(mode) {
-  currentMode = mode;
-  const signup = mode === "signup";
+const authClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
-  document.getElementById("heading").textContent =
-    signup ? "Create Your Account" : "Welcome Back";
-  document.getElementById("subtitle").textContent =
-    signup
-      ? "Join the club. Challenge your mind. Rise through the ranks."
-      : "Your next challenge is waiting. Sign in to continue.";
+let mode = "signup";
+const $ = id => document.getElementById(id);
 
-  document.getElementById("nameField").classList.toggle("hidden", !signup);
-  document.getElementById("usernameField").classList.toggle("hidden", !signup);
-
-  document.getElementById("fullName").required = signup;
-  document.getElementById("username").required = signup;
-  document.getElementById("password").autocomplete =
-    signup ? "new-password" : "current-password";
-
-  document.getElementById("submitButton").textContent =
-    signup ? "CREATE ACCOUNT" : "LOG IN";
-
-  document.getElementById("signupTab").classList.toggle("active", signup);
-  document.getElementById("loginTab").classList.toggle("active", !signup);
-
-  document.getElementById("demoStatus").classList.add("hidden");
+function showMessage(text, type = "info") {
+  const el = $("message");
+  el.textContent = text;
+  el.className = "message show " + type;
+}
+function clearMessage() {
+  $("message").textContent = "";
+  $("message").className = "message";
+}
+function setMode(nextMode) {
+  mode = nextMode;
+  const signingUp = mode === "signup";
+  $("heading").textContent = signingUp ? "Create your account" : "Welcome back";
+  $("intro").textContent = signingUp
+    ? "Join the arena. Build your skills. Make every move count."
+    : "Sign in and return to your arena.";
+  $("nameField").style.display = signingUp ? "block" : "none";
+  $("usernameField").style.display = signingUp ? "block" : "none";
+  $("fullName").required = signingUp;
+  $("username").required = signingUp;
+  $("password").autocomplete = signingUp ? "new-password" : "current-password";
+  $("submitBtn").textContent = signingUp ? "CREATE ACCOUNT" : "LOG IN";
+  $("signupTab").classList.toggle("active", signingUp);
+  $("loginTab").classList.toggle("active", !signingUp);
+  clearMessage();
 }
 
-function submitDemo(event) {
+function showAccount(user) {
+  $("authCard").classList.remove("visible");
+  $("accountCard").classList.add("visible");
+  $("accountEmail").textContent = user.email || "Email unavailable";
+  const metadata = user.user_metadata || {};
+  $("accountUsername").textContent = metadata.username || "Player";
+}
+
+function showAuth() {
+  $("accountCard").classList.remove("visible");
+  $("authCard").classList.add("visible");
+}
+
+$("authForm").addEventListener("submit", async event => {
   event.preventDefault();
+  clearMessage();
 
-  const status = document.getElementById("demoStatus");
-  status.textContent =
-    currentMode === "signup"
-      ? "Preview only: account creation is not active yet. Secure authentication will be connected in the next step."
-      : "Preview only: login is not active yet. No credentials have been sent or saved.";
+  const email = $("email").value.trim();
+  const password = $("password").value;
+  const button = $("submitBtn");
+  button.disabled = true;
+  button.textContent = mode === "signup" ? "CREATING ACCOUNT..." : "SIGNING IN...";
 
-  status.classList.remove("hidden");
-}
+  try {
+    let result;
+    if (mode === "signup") {
+      const fullName = $("fullName").value.trim();
+      const username = $("username").value.trim();
+
+      if (!/^[A-Za-z0-9_]{3,20}$/.test(username)) {
+        throw new Error("Choose a username with 3–20 letters, numbers, or underscores.");
+      }
+
+      result = await authClient.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: window.location.origin + window.location.pathname,
+          data: { full_name: fullName, username }
+        }
+      });
+
+      if (result.error) throw result.error;
+
+      if (result.data.session) {
+        showAccount(result.data.user);
+      } else {
+        showMessage("Your signup request was received. Check your email for a confirmation link before logging in.");
+      }
+    } else {
+      result = await authClient.auth.signInWithPassword({ email, password });
+      if (result.error) throw result.error;
+      showAccount(result.data.user);
+    }
+  } catch (error) {
+    showMessage(error.message || "Something went wrong. Please try again.", "error");
+  } finally {
+    button.disabled = false;
+    button.textContent = mode === "signup" ? "CREATE ACCOUNT" : "LOG IN";
+  }
+});
+
+$("logoutBtn").addEventListener("click", async () => {
+  $("logoutBtn").disabled = true;
+  const { error } = await authClient.auth.signOut();
+  $("logoutBtn").disabled = false;
+  if (error) {
+    $("accountMessage").textContent = error.message;
+    $("accountMessage").className = "message show error";
+  } else {
+    showAuth();
+    setMode("login");
+    showMessage("You have been logged out.");
+  }
+});
+
+(async function restoreSession() {
+  const { data, error } = await authClient.auth.getSession();
+  if (!error && data.session) showAccount(data.session.user);
+})();
+
+authClient.auth.onAuthStateChange((event, session) => {
+  if (session) showAccount(session.user);
+});
 </script>
 </body>
 </html>
