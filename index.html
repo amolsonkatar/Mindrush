@@ -1,14 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#090b0a">
 <title>MindRush | The Art of Playing Smart</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#090b0a;color:#f4f0e5;font-family:Arial,Helvetica,sans-serif}
+button{font:inherit;cursor:pointer}
 .app{max-width:600px;margin:auto;padding:22px 16px 100px}
 header{display:flex;align-items:center;gap:12px;margin-bottom:28px}
 .logo{background:#174b34;border:1px solid #d6bc75;border-radius:14px;padding:12px;font-size:24px}
@@ -20,7 +20,6 @@ header{display:flex;align-items:center;gap:12px;margin-bottom:28px}
 h1{font-size:34px;line-height:1.12;margin:14px 0}
 .green{color:#6ee7a8}
 p{font-size:13px;line-height:1.7;color:#b2bcb4}
-button{font:inherit;cursor:pointer}
 .primary{width:100%;padding:15px;border:0;border-radius:12px;background:#1b6745;color:white;font-weight:800;margin-top:14px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 28px}
 .stat,.game{background:#121713;border:1px solid #2b382e;border-radius:17px;padding:16px}
@@ -49,29 +48,48 @@ nav button:first-child{color:#6ee7a8}
 <main class="app">
 <header>
 <div class="logo">♛</div>
-<div><div class="brand">MINDRUSH</div><div class="tag">THE ART OF PLAYING SMART</div></div>
+<div>
+<div class="brand">MINDRUSH</div>
+<div class="tag">THE ART OF PLAYING SMART</div>
+</div>
 <button class="profile" onclick="notice('Profile setup is coming soon.')" aria-label="Profile">♙</button>
 </header>
 
 <section class="hero">
 <div class="gold">YOUR NEXT VICTORY AWAITS</div>
 <h1>THINK SHARP.<br><span class="green">PLAY SMART.</span></h1>
-<p>Challenge your mind. Master every round. Rise through the ranks.</p>
+<p>Challenge your mind, solve puzzles, and earn XP. Every challenge takes under 5 minutes.</p>
 <button class="primary" onclick="notice('Account access is coming soon. Stay tuned!')">ENTER THE ARENA →</button>
 </section>
 
 <section class="stats">
-<div class="stat"><div class="symbol">⚡</div><div class="value">100 XP</div><div class="small">Welcome Bonus · Demo</div></div>
-<div class="stat"><div class="symbol">🏆</div><div class="value">TOP 50</div><div class="small">Weekly Rankings · Demo</div></div>
+<div class="stat">
+<div class="symbol">⚡</div>
+<div class="value">100 XP</div>
+<div class="small">Welcome Bonus · Demo</div>
+</div>
+<div class="stat">
+<div class="symbol">🏆</div>
+<div class="value">TOP 50</div>
+<div class="small">Weekly Rankings · Demo</div>
+</div>
 </section>
 
 <section>
 <div class="heading">CHOOSE YOUR CHALLENGE</div>
 <div class="games">
-<button class="game" onclick="notice('Brain Quiz is coming soon.')"><div class="symbol">🧠</div><strong>Brain Quiz</strong><span class="small">Knowledge · 2 MIN</span></button>
-<button class="game" onclick="notice('Math Rush is coming soon.')"><div class="symbol">✦</div><strong>Math Rush</strong><span class="small">Speed · 2 MIN</span></button>
-<button class="game" onclick="notice('Memory Match is coming soon.')"><div class="symbol">▦</div><strong>Memory Match</strong><span class="small">Memory · 3 MIN</span></button>
-<button class="game" onclick="notice('Logic Battle is coming soon.')"><div class="symbol">◇</div><strong>Logic Battle</strong><span class="small">Puzzles · 4 MIN</span></button>
+<button class="game" onclick="notice('Brain Quiz is coming soon.')">
+<div class="symbol">🧠</div><strong>Brain Quiz</strong><span class="small">Knowledge · 2 MIN</span>
+</button>
+<button class="game" onclick="notice('Math Rush is coming soon.')">
+<div class="symbol">✦</div><strong>Math Rush</strong><span class="small">Speed · 2 MIN</span>
+</button>
+<button class="game" onclick="notice('Memory Match is coming soon.')">
+<div class="symbol">▦</div><strong>Memory Match</strong><span class="small">Memory · 3 MIN</span>
+</button>
+<button class="game" onclick="notice('Logic Battle is coming soon.')">
+<div class="symbol">◇</div><strong>Logic Battle</strong><span class="small">Puzzles · 4 MIN</span>
+</button>
 </div>
 </section>
 
@@ -79,18 +97,20 @@ nav button:first-child{color:#6ee7a8}
 <div class="gold">THE EXCLUSIVE EXPERIENCE</div>
 <h2>♛ MindRush Premium</h2>
 <div class="price">₹699 <span>/ lifetime</span></div>
-<p>Exclusive games, special tournaments, an ad-free experience and a premium profile badge.</p>
-<button onclick="notice('Demo mode: payments are not active. Membership terms and eligibility will be shown before any live payment.')">EXPLORE PREMIUM</button>
+<p>Enjoy exclusive games, special tournaments, an ad-free experience, and a premium profile badge.</p>
+<button onclick="notice('Demo mode: Payments are not active. Membership terms and eligibility will be shown before any live payment.')">EXPLORE PREMIUM</button>
 </section>
 
-<p class="note">DEMO VERSION · XP and rewards are simulated. Real payments, cash prizes and withdrawals are not available.</p>
+<p class="note">DEMO VERSION · XP and rewards are simulated. Real payments, cash prizes, and withdrawals are not available.</p>
 </main>
+
 <nav>
 <button onclick="notice('Home dashboard')"><span>⌂</span>HOME</button>
 <button onclick="notice('Games are coming soon.')"><span>♧</span>GAMES</button>
 <button onclick="notice('Rankings are coming soon.')"><span>♜</span>RANKS</button>
 <button onclick="notice('Profile is coming soon.')"><span>♙</span>PROFILE</button>
 </nav>
+
 <script>
 function notice(message){alert(message)}
 </script>
